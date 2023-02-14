@@ -226,11 +226,37 @@
 		</div>
 	</div>
 
-<!--show product----------------------------------------------------------------------->
-
-	<div class="container" id="showProduct" style="display: flex">
+	<!--search product----------------------------------------------------------------------->
+	<div class="topnav">
+		<a class="active" href="#home">Home</a>
+		<div class="search-container">
+			<form action="/action_page.php">
+				<input type="text" placeholder="Search.." name="search">
+				<button type="submit"><i class="fa fa-search"></i></button>
+			</form>
+		</div>
 	</div>
 
+<!--show product----------------------------------------------------------------------->
+	<section class="ftco-section">
+	<div class="container"  >
+		<div class="row justify-content-center">
+			<div class="col-md-10 mb-5 text-center">
+				<ul class="product-category">
+					<li><a href="#" class="active">All</a></li>
+					<li><a href="#">Vegetables</a></li>
+					<li><a href="#">Fruits</a></li>
+					<li><a href="#">Juice</a></li>
+					<li><a href="#">Dried</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row" ></div>
+		<div class="col-md-6 col-lg-3 ftco-animate">
+			<div class="product" id="showProduct" ></div>
+			</div>
+	</div>
+	</section>
 </section>
 
 <!--Modal showDetail product------------------------------------------------------------>
@@ -500,5 +526,5 @@
 <script src="js/main.js"></script>
 
 </body>
-<script src="product.js"></script>
+<script src="js/product.js"></script>
 </html>
