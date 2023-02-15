@@ -47,14 +47,14 @@
                 <div class="row d-flex">
                     <div class="col-md pr-4 d-flex topper align-items-center">
                         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-                        <span class="text">+ 1235 2355 98</span>
+                        <span class="text">+ 123456789</span>
                     </div>
                     <div class="col-md pr-4 d-flex topper align-items-center">
                         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-                        <span class="text">youremail@email.com</span>
+                        <span class="text">dotruongbachpro@gmail.com</span>
                     </div>
                     <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                        <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+                        <span class="text">web quan ly product dinh cao</span>
                     </div>
                 </div>
             </div>
@@ -70,22 +70,16 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item active"><button onclick="show()" class="nav-link" style="color: #a71d2a">Show product</button></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">FUNCTION</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <button class="dropdown-item" data-toggle="modal" data-target="#modalLoginAvatar">Create new product</button>
-                        <a class="dropdown-item" href="../wishlist.html">Wishlist</a>
-                        <a class="dropdown-item" href="../product-single.html">Single Product</a>
-                        <a class="dropdown-item" href="../cart.html">Cart</a>
-                        <a class="dropdown-item" href="../checkout.html">Checkout</a>
+                        <a class="dropdown-item" href="#">Image Manager</a>
+
                     </div>
                 </li>
                 <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="../blog.html" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
-                <li class="nav-item cta cta-colored"><a href="../cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
             </ul>
         </div>
     </div>
@@ -98,9 +92,10 @@
 
 
 <!-- body -->
-<div >
-    <div class="container mt-3" >
-        <table class="table" >
+<section class="ftco-section img" style="background-image: url(../images/products/backgroundGif.gif);">
+<div>
+    <div class="container mt-3" style="overflow: scroll" >
+        <table style="background-color: #78d5ef" class="table" >
             <thead>
             <tr>
                 <th>ID</th>
@@ -109,10 +104,11 @@
                 <th>DESCRIPTION</th>
                 <th>CATEGORY</th>
                 <th>PRODUCT STATUS</th>
+                <th>IMAGE</th>
                 <th>FUNCTION</th>
             </tr>
             </thead>
-            <tbody id="show">
+            <tbody id="show" >
             </tbody>
         </table>
 
@@ -120,9 +116,10 @@
 </div>
 
 <!-- body -->
-<section class="ftco-section img" style="background-image: url(../images/footerAdmin.jpg);">
+
 
 </section>
+<section class="ftco-section img" style="background-image: url(../images/products/banner.gif);height: 100px"></section>
 <!--Modal: Login with Avatar Form-->
 <div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true" >
@@ -154,6 +151,8 @@
                     <label>Input product description: </label>
                     <input  type="text" id="description">
                     <br>
+                    <input type="file" id="img" onchange="showImg()">
+                    <br>
                     choose product status: <select id="productStatus">
                     </select>
                     <br>
@@ -165,7 +164,7 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <button type="button"  class="btn btn-success" data-dismiss="modal" onclick="create()">Submit <i class="fas fa-sign-in ml-1"></i></button>
+                    <button type="button"  class="btn btn-success" data-dismiss="modal" onclick="upImg()" >Submit <i class="fas fa-sign-in ml-1"></i></button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>

@@ -1,6 +1,9 @@
 let isCreate = true;
+let result = false;
 // // Lấy phần tử dấu X
 // let closeBtn = document.getElementsByClassName("close")[0];
+let imgInp = document.getElementById("img");
+let blah = document.getElementById("blah");
 
 function show() {
     $.ajax({
@@ -22,6 +25,7 @@ function show() {
         <td>${product.description}</td>
         <td style="color: #a71d2a">${product.productStatus.name}</td>
         <td>${product.category.name}</td>
+        <td>${product.img}</td>
        <td> <a type="button" class="btn btn-warning" onclick="showEdit(${product.id})" data-toggle="modal" data-target="#modalLoginAvatar">Edit</a>
                         <a type="button" class="btn btn-danger" onclick="deleteProduct(${product.id})" >Delete</a></td>
       </tr>
@@ -36,10 +40,9 @@ function show() {
         }
     })
 
-
 }
 
-show()
+
 
 function productCategoryOption() {
 
@@ -83,23 +86,11 @@ function productStatusOption() {
 
 productStatusOption();
 
-function create() {
-    let product = {
-        "name": $("#name").val(),
-        "description": $("#description").val(),
-        "productStatus": {
-            "id": $("#cateOt").val(),
-        },
-        "price": $("#price").val(),
-        "category": {
-            "id": $("#productSttOt").val(),
-        }
+function createImg(id,image){
+    let img ={
+        "url" : image,
+        "product" : id
     }
-
-    if (!isCreate) {
-        product.id = $("#id").val();
-    }
-
     $.ajax({
         type: "Post",
         headers: {
@@ -108,17 +99,67 @@ function create() {
             // 'Authorization': 'Bearer ' + localStorage.getItem("token")
 
         },
-        url: "http://localhost:8080/products",
-        data: JSON.stringify(product),
+        url: "http://localhost:8080/images",
+        data: JSON.stringify(img),
         //xử lý khi thành công
-        success: function (product) {
-            alert("Tạo thành công");
-            show();
+        success: function (data) {
+
         },
         error: function (err) {
             console.log(err)
         }
     })
+}
+
+function create(image) {
+    let check = result;
+    console.log(check)
+
+    let product = {
+
+        "name": $("#name").val(),
+        "description": $("#description").val(),
+        "productStatus": {
+            "id": $("#cateOt").val(),
+        },
+        "price": $("#price").val(),
+        "category": {
+            "id": $("#productSttOt").val(),
+        },
+
+    }
+    createImg($("#id").val(),image);
+
+    if (!isCreate) {
+        product.id = $("#id").val();
+    }
+    if (check) {
+        $.ajax({
+            type: "Post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+
+            },
+            url: "http://localhost:8080/products",
+            data: JSON.stringify(product),
+            //xử lý khi thành công
+            success: function (product) {
+                alert("Tạo thành công");
+                clearEdit()
+                clearCheckName()
+                show();
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    } else {
+        alert("Tạo không thành công, nhập lại")
+        clearCheckName()
+        clearEdit()
+    }
 }
 
 function clearEdit() {
@@ -128,7 +169,9 @@ function clearEdit() {
     $("#price").val("");
     $("#description").val("");
 }
-
+function clearCheckName(){
+    $("#checkName").html("");
+}
 
 // đóng modal
 
@@ -201,16 +244,41 @@ function checkduplicateNameProduct() {
             // 'Content-Type': 'application/json',
             // 'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
-
         //xử lý khi thành công
         success: function (check) {
-            if (!check) {
-                console.log(check);
+            console.log(check)
+            if (check===false) {
                 $("#checkName").text("trùng tên rồi!")
-            }else {$("#checkName").text("✅")}
-        },
-        error: function (err) {
-            console.log(err)
+                result=false
+            } else {
+                $("#checkName").text("✅")
+                result = true
+            }
+            return result
         }
     })
+}
+
+function upImg() {
+    let fileImg = document.getElementById("img").files;
+    let formData = new FormData();
+    formData.append("fileImg", fileImg[0]);
+
+    $.ajax({
+        contentType: false,
+        processData: false,
+        headers: {
+            // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+        },
+        type: "POST",
+        data: formData,
+        url: "http://localhost:8080/products/upImg",
+        success: function (img) {
+            create(img)
+        }
+    });
+}
+function showImg() {
+    let file = imgInp.files;
+    blah.src = URL.createObjectURL(file[0])
 }
