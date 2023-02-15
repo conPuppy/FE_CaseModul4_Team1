@@ -99,7 +99,17 @@ function showProductDetail(id){
 
             for (const a of getImage) {
                 str += `<div >
-                <img src="${a.url}" width="300px" height="200px">
+                
+                <div> 
+                        <img src="${a.url}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="..." class="d-block w-100" alt="...">
+                    </div>
+                
                 </div>`
             }
             document.getElementById("showProductDetail").innerHTML = str;
@@ -555,3 +565,57 @@ function filterCategory2(){
     })
 }
 
+function topProduct(){
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json'
+        },
+        url: "http://localhost:8080/products/topProduct",
+        //xử lý khi thành công
+        success: function (product) {
+            let str = '';
+            for (const p of product) {
+                str += `<div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="product">
+                    <a onclick="showProductDetail(${p.idProduct})" data-bs-toggle="modal" data-bs-target="#myModal" class="img-prod"><img class="img-fluid" id="${p.idProduct}" width="300px" height="200px" alt="Colorlib Template">
+                        <span class="status">30%</span>
+                        <div class="overlay"></div>
+                    </a>
+                    <div class="text py-3 pb-4 px-3 text-center">
+                        <h3><a >${p.namep}</a></h3>
+                        <div class="d-flex">
+                            <div class="pricing">
+                                <p class="price">
+                                <span class="price-sale">$${p.price}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <h3>(${p.nameStatus})</h3>
+                        <div class="bottom-area d-flex px-3">
+                            <div class="m-auto d-flex">
+                                <a href="#"
+                                   class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <span><i class="ion-ios-menu"></i></span>
+                                </a>
+                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <span><i class="ion-ios-cart" onclick=""></i></span>
+                                </a>
+                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                    <span><i class="ion-ios-heart"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+            }
+            showImage();
+            document.getElementById("showProduct").innerHTML = str;
+
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
