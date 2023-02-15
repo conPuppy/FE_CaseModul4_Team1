@@ -2,7 +2,8 @@ function showProduct() {
     $.ajax({
         type: "GET",
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
         url: "http://localhost:8080/products",
         //xử lý khi thành công
@@ -59,7 +60,8 @@ function showImage() {
     $.ajax({
         type: "GET",
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
         url: "http://localhost:8080/images",
         //xử lý khi thành công
