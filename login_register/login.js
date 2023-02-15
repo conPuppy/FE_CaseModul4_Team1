@@ -24,6 +24,11 @@ function login() {
     })
 }
 
+function register() {
+
+}
+
+
 function demo() {
     alert("alo?")
 }
