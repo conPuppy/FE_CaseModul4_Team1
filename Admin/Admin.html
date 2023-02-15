@@ -37,6 +37,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="../crudAccount/crudAccount.js"></script>
 
 </head>
 <body class="goto-here">
@@ -81,7 +82,7 @@
                         <a class="dropdown-item" href="../checkout.html">Checkout</a>
                     </div>
                 </li>
-                <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a onclick="showAccount()" class="nav-link">Show account</a></li>
                 <li class="nav-item"><a href="../blog.html" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
                 <li class="nav-item cta cta-colored"><a href="../cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
@@ -115,9 +116,10 @@
             <tbody id="show">
             </tbody>
         </table>
+</div>
+</div>
 
-</div>
-</div>
+<div id="showAccount"></div>
 
 <!-- body -->
 <section class="ftco-section img" style="background-image: url(../images/footerAdmin.jpg);">
@@ -177,12 +179,61 @@
 </div>
 <!--Modal: Login with Avatar Form-->
 
+<!--Modal: Login with Avatar Form-->
+<div class="modal fade" id="modalEditAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" >
+    <div class="modal-dialog cascading-modal modal-avatar modal-xl" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header">
+                <h5>Edit account</h5>
+            </div>
+            <!--            <span class="close">&times;</span>-->
+            <div style="text-align: center">
+                <br>
+                <input type="file" id="editAvatar"><br>
+                <img width="150" id="displayAvatar" class="rounded-circle img-responsive">
+            </div>
+            <!--Body-->
+            <div class="modal-body text-center mb-1">
+
+                <h5 class="mt-1 mb-2">Edit account</h5>
+
+                <div style="text-align: center" class="md-form ml-0 mr-0">
+                    <label>Edit username: </label><br>
+                    <input  type="text" id="editId" hidden>
+                    <input  type="text" id="editUsername"><br>
+                    <label>Edit password: </label><br>
+                    <input  type="text" id="editPassword"><br>
+                    <label>Edit full name: </label><br>
+                    <input  type="text" id="editFullName"><br>
+                    <label>Edit Email: </label><br>
+                    <input  type="text" id="editEmail"><br>
+                    <label>Edit Address: </label><br>
+                    <input  type="text" id="editAddress"><br>
+                    <label>Edit Phone number: </label><br>
+                    <input  type="text" id="editPhoneNumber"><br>
+                    <br>
+                    <input  type="text" id="editRole" hidden><br>
+                    <br>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="button" onclick="editAccount()" class="btn btn-success" data-dismiss="modal">Submit <i class="fas fa-sign-in ml-1"></i></button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+        <!--/.Content-->
+    </div>
+
+</div>
+<!--Modal: Login with Avatar Form-->
 
 <hr>
-
-
-
-
 
 
 <!-- loader -->

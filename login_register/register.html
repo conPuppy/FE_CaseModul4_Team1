@@ -62,7 +62,8 @@
           </div>
           <div class="form-group last mb-3">
             <label for="reAvatar">Avatar</label>
-            <input type="file" class="form-control" placeholder="Your Password" id="reAvatar">
+            <input type="file" class="form-control" onchange="showImg()" id="reAvatar">
+            <img id="displayAvatar" src="#" width="100" height="100">
             <input type="hidden" value="1" id="reRole">
           </div>
 

@@ -30,7 +30,7 @@ function register(img) {
 
 function upImg() {
     let fileImg = document.getElementById("reAvatar").files;
-    let formData = new FormData();
+    var formData = new FormData();
     formData.append("fileImg", fileImg[0]);
 
     $.ajax({
@@ -46,4 +46,12 @@ function upImg() {
             register(img)
         }
     });
+}
+
+let imgInp = document.getElementById("reAvatar");
+let displayAvatar = document.getElementById("displayAvatar")
+
+function showImg() {
+    let file = imgInp.files;
+    displayAvatar.src = URL.createObjectURL(file[0])
 }

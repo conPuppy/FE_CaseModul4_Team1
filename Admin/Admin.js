@@ -7,7 +7,7 @@ function show() {
         type: "GET",
         headers: {
             'Accept': 'application/json',
-            //     'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
         url: "http://localhost:8080/products",
         //xử lý khi thành công
@@ -27,16 +27,12 @@ function show() {
       </tr>
 `
             }
-
             document.getElementById("show").innerHTML = str;
-
         },
         error: function (err) {
             console.log(err)
         }
     })
-
-
 }
 
 show()
@@ -207,7 +203,9 @@ function checkduplicateNameProduct() {
             if (!check) {
                 console.log(check);
                 $("#checkName").text("trùng tên rồi!")
-            }else {$("#checkName").text("✅")}
+            } else {
+                $("#checkName").text("✅")
+            }
         },
         error: function (err) {
             console.log(err)
