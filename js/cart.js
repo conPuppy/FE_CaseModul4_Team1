@@ -10,8 +10,11 @@ function showCart() {
         url: "http://localhost:8080/accounts/cart/"+ username,
         //xử lý khi thành công
         success: function (carts) {
+
             let str = '';
             for (const c of carts) {
+                let total = c.product.price * c.amount;
+                let x = ''+ total;
                 str+=`<tr class="text-center">
         <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
         
@@ -22,21 +25,17 @@ function showCart() {
         <p>${c.product.description}</p>
         </td>
         
-        <td class="price" id="'price'${c.product.id}">${c.product.price}</td>
+        <td class="price" >${c.product.price}</td>
         
         <td class="quantity">
         <div class="input-group mb-3">
-             <input type="text" name="quantity" class="quantity form-control input-number" id="'amount'${c.product.id}" value="${c.amount}" min="1" max="100">
+             <input type="text" name="quantity" class="quantity form-control input-number" value="${c.amount}" min="1" max="100">
           </div>
           </td>
         
-        <td class="total" id="total${c.product.id}"></td>
+        <td class="total" >${x}</td>
       </tr><!-- END TR-->`
-                // function unitPrice() {
-                //     let x = document.getElementById('price'${c.product.id}) * document.getElementById('amount'${c.product.id});
-                //     document.getElementById("total"${c.product.id}).innerHTML = x;
-                // }
-                // unitPrice();
+
             }
             showImage();
             document.getElementById("showCart").innerHTML = str;

@@ -133,6 +133,7 @@ function updateCart(id) {
             alert("them vao cart thanh cong")
             showCart();
             showImage();
+            location.href="cart.html";
 
         },
         error: function (err) {
