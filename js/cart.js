@@ -12,9 +12,12 @@ function showCart() {
         success: function (carts) {
 
             let str = '';
+            let subtotal = 0;
+
             for (const c of carts) {
                 let total = c.product.price * c.amount;
                 let x = ''+ total;
+                subtotal+=total;
                 str+=`<tr class="text-center">
         <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
         
@@ -33,12 +36,16 @@ function showCart() {
           </div>
           </td>
         
-        <td class="total" >${x}</td>
+        <td class="total" >${x} VND</td>
       </tr><!-- END TR-->`
 
             }
-            showImage();
+            let subtotalstr = ''+ subtotal +' VND';
+
+                showImage();
             document.getElementById("showCart").innerHTML = str;
+            document.getElementById("subtotal").innerHTML = subtotalstr;
+            document.getElementById("total").innerHTML = subtotalstr;
 
         },
         error: function (err) {
