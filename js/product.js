@@ -5,7 +5,7 @@ function showProduct() {
         headers: {
             'Accept': 'application/json'
         },
-        url: "http://localhost:8080/products",
+        url: "http://localhost:8080/products/show",
         //xử lý khi thành công
         success: function (product) {
             let str = '';
