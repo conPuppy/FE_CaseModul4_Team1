@@ -25,7 +25,7 @@ function show() {
         <td>${product.description}</td>
         <td style="color: #a71d2a">${product.productStatus.name}</td>
         <td>${product.category.name}</td>
-        <td>${product.img}</td>
+        <td ><img style="width: 30%" id="${product.id}" src=""></td>
        <td> <a type="button" class="btn btn-warning" onclick="showEdit(${product.id})" data-toggle="modal" data-target="#modalLoginAvatar">Edit</a>
                         <a type="button" class="btn btn-danger" onclick="deleteProduct(${product.id})" >Delete</a></td>
       </tr>
@@ -33,6 +33,7 @@ function show() {
             }
 
             document.getElementById("show").innerHTML = str;
+            showImage()
 
         },
         error: function (err) {
@@ -86,10 +87,12 @@ function productStatusOption() {
 
 productStatusOption();
 
-function createImg(id,image){
-    let img ={
-        "url" : image,
-        "product" : id
+function createImg(id,img){
+    let image ={
+        "url" : img,
+        "product":{
+            "id":id,
+        }  ,
     }
     $.ajax({
         type: "Post",
@@ -100,7 +103,7 @@ function createImg(id,image){
 
         },
         url: "http://localhost:8080/images",
-        data: JSON.stringify(img),
+        data: JSON.stringify(image),
         //xử lý khi thành công
         success: function (data) {
 
@@ -111,7 +114,7 @@ function createImg(id,image){
     })
 }
 
-function create(image) {
+function create(img) {
     let check = result;
     console.log(check)
 
@@ -126,9 +129,8 @@ function create(image) {
         "category": {
             "id": $("#productSttOt").val(),
         },
-
     }
-    createImg($("#id").val(),image);
+
 
     if (!isCreate) {
         product.id = $("#id").val();
@@ -146,6 +148,8 @@ function create(image) {
             data: JSON.stringify(product),
             //xử lý khi thành công
             success: function (product) {
+                let a= product.id;
+                createImg(a,img);
                 alert("Tạo thành công");
                 clearEdit()
                 clearCheckName()
@@ -278,7 +282,50 @@ function upImg() {
         }
     });
 }
-function showImg() {
+function showImgWhenChoose() {
     let file = imgInp.files;
     blah.src = URL.createObjectURL(file[0])
+}
+
+function showImage() {
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json'
+        },
+        url: "http://localhost:8080/images",
+        //xử lý khi thành công
+        success: function (image) {
+            for (const i of image) {
+                let a = i.product.id;
+                if(document.getElementById(a) != null)  {
+                    document.getElementById(a).setAttribute('src', i.url);
+                }
+            }
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+function deleteImg(id){
+    $.ajax({
+        url: "http://localhost:8080/images/" + id,
+        type: "Delete",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+
+        },
+        success: function (response) {
+
+            console.log(response);
+            show()
+        },
+        error: function (err) {
+            // Xử lý lỗi nếu có
+            console.error(err);
+        }
+    });
 }
