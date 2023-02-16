@@ -172,6 +172,7 @@ function clearEdit() {
     $("#name").val("");
     $("#price").val("");
     $("#description").val("");
+    clearCheckName()
 }
 function clearCheckName(){
     $("#checkName").html("");
@@ -237,6 +238,8 @@ function showEdit(id) {
             console.log(err)
         }
     })
+
+    clearEdit()
 }
 
 function checkduplicateNameProduct() {
