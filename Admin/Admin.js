@@ -10,7 +10,7 @@ function show() {
         type: "GET",
         headers: {
             'Accept': 'application/json',
-            //     'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
         url: "http://localhost:8080/products",
         //xử lý khi thành công
@@ -23,18 +23,15 @@ function show() {
         <td>${product.name}</td>
         <td>${product.price}</td>
         <td>${product.description}</td>
-        <td style="color: #a71d2a">${product.productStatus.name}</td>
         <td>${product.category.name}</td>
+        <td style="color: #a71d2a">${product.productStatus.name}</td>
         <td ><img style="width: 30%" id="${product.id}" src=""></td>
        <td> <a type="button" class="btn btn-warning" onclick="showEdit(${product.id})" data-toggle="modal" data-target="#modalLoginAvatar">Edit</a>
                         <a type="button" class="btn btn-danger" onclick="deleteProduct(${product.id})" >Delete</a></td>
-      </tr>
-`
+      </tr>`
             }
-
             document.getElementById("show").innerHTML = str;
             showImage()
-
         },
         error: function (err) {
             console.log(err)
@@ -44,13 +41,13 @@ function show() {
 }
 
 
-
 function productCategoryOption() {
 
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/categories",
         'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
         success: function (categories) {
             let str = '<option value="" selected id="selectDf1">--choose--</option>';
             for (const category of categories) {
@@ -71,6 +68,7 @@ function productStatusOption() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/prStt",
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
         'Accept': 'application/json',
         success: function (productStatus) {
             let str = '<option value="" selected id="selectDf2">--choose--</option>';
@@ -87,19 +85,19 @@ function productStatusOption() {
 
 productStatusOption();
 
-function createImg(id,img){
-    let image ={
-        "url" : img,
-        "product":{
-            "id":id,
-        }  ,
+function createImg(id, img) {
+    let image = {
+        "url": img,
+        "product": {
+            "id": id,
+        },
     }
     $.ajax({
         type: "Post",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
 
         },
         url: "http://localhost:8080/images",
@@ -119,7 +117,7 @@ function create(img) {
     console.log(check)
 
     let product = {
-
+        "id": $("#idPr").val(),
         "name": $("#name").val(),
         "description": $("#description").val(),
         "productStatus": {
@@ -133,7 +131,7 @@ function create(img) {
 
 
     if (!isCreate) {
-        product.id = $("#id").val();
+        product.id = $("#idPr").val();
     }
     if (check) {
         $.ajax({
@@ -141,15 +139,15 @@ function create(img) {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
 
             },
             url: "http://localhost:8080/products",
             data: JSON.stringify(product),
             //xử lý khi thành công
             success: function (product) {
-                let a= product.id;
-                createImg(a,img);
+                let a = product.id;
+                createImg(a, img);
                 alert("Tạo thành công");
                 clearEdit()
                 clearCheckName()
@@ -174,7 +172,8 @@ function clearEdit() {
     $("#description").val("");
     clearCheckName()
 }
-function clearCheckName(){
+
+function clearCheckName() {
     $("#checkName").html("");
 }
 
@@ -191,12 +190,12 @@ function clearCheckName(){
 
 function deleteProduct(id) {
     $.ajax({
-        url: "http://localhost:8080/products/" + id,
-        type: "Delete",
+        url: "http://localhost:8080/products/delete/" + id,
+        type: "get",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
 
         },
         success: function (response) {
@@ -219,12 +218,12 @@ function showEdit(id) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
         //xử lý khi thành công
         success: function (product) {
             console.log(product)
-            document.getElementById("id").value = product.id;
+            document.getElementById("idPr").value = product.id;
             $("#name").val(product.name);
             $("#price").val(product.price);
             $("#description").val(product.description);
@@ -249,14 +248,14 @@ function checkduplicateNameProduct() {
         url: "http://localhost:8080/products/check/" + productName,
         headers: {
             // 'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
         //xử lý khi thành công
         success: function (check) {
             console.log(check)
-            if (check===false) {
+            if (check === false) {
                 $("#checkName").text("trùng tên rồi!")
-                result=false
+                result = false
             } else {
                 $("#checkName").text("✅")
                 result = true
@@ -275,7 +274,7 @@ function upImg() {
         contentType: false,
         processData: false,
         headers: {
-            // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
         type: "POST",
         data: formData,
@@ -285,6 +284,7 @@ function upImg() {
         }
     });
 }
+
 function showImgWhenChoose() {
     let file = imgInp.files;
     blah.src = URL.createObjectURL(file[0])
@@ -294,14 +294,15 @@ function showImage() {
     $.ajax({
         type: "GET",
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
         url: "http://localhost:8080/images",
         //xử lý khi thành công
         success: function (image) {
             for (const i of image) {
                 let a = i.product.id;
-                if(document.getElementById(a) != null)  {
+                if (document.getElementById(a) != null) {
                     document.getElementById(a).setAttribute('src', i.url);
                 }
             }
@@ -311,14 +312,15 @@ function showImage() {
         }
     })
 }
-function deleteImg(id){
+
+function deleteImg(id) {
     $.ajax({
         url: "http://localhost:8080/images/" + id,
         type: "Delete",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
 
         },
         success: function (response) {
