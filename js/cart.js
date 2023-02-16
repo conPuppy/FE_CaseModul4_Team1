@@ -1,32 +1,6 @@
-function updateCart() {
-    let cart = {
-        "username": document.getElementById("username").value,
-        "password": $("#password").val()
-    }
 
-    $.ajax({
-        type: "Post",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        url: "http://localhost:8080/login",
-        data: JSON.stringify(account),
-        //xử lý khi thành công
-        success: function (data) {
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data));
-            alert("thành công")
-            location.href="index.html";
-        },
-        error: function (err) {
-            console.log(err)
-        }
-    })
-}
 function showCart() {
     let username =JSON.parse(localStorage.getItem("user")).userName;
-    alert(username)
     $.ajax({
         type: "GET",
         headers: {
@@ -48,17 +22,21 @@ function showCart() {
         <p>${c.product.description}</p>
         </td>
         
-        <td class="price">${c.product.price}</td>
+        <td class="price" id="'price'${c.product.id}">${c.product.price}</td>
         
         <td class="quantity">
         <div class="input-group mb-3">
-             <input type="text" name="quantity" class="quantity form-control input-number" value="${c.amount}" min="1" max="100">
+             <input type="text" name="quantity" class="quantity form-control input-number" id="'amount'${c.product.id}" value="${c.amount}" min="1" max="100">
           </div>
           </td>
         
-        <td class="total">$4.90</td>
+        <td class="total" id="total${c.product.id}"></td>
       </tr><!-- END TR-->`
-
+                // function unitPrice() {
+                //     let x = document.getElementById('price'${c.product.id}) * document.getElementById('amount'${c.product.id});
+                //     document.getElementById("total"${c.product.id}).innerHTML = x;
+                // }
+                // unitPrice();
             }
             showImage();
             document.getElementById("showCart").innerHTML = str;
@@ -69,6 +47,8 @@ function showCart() {
         }
     })
 }
+
+
 showCart();
 function showImage() {
     $.ajax({

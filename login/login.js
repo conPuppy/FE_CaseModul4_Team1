@@ -8,7 +8,8 @@ function login() {
         type: "Post",
         headers: {
             "Accept" : 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+
         },
         url: "http://localhost:8080/login",
         data: JSON.stringify(account),
