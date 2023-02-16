@@ -144,3 +144,10 @@ function deleteAccount(id) {
         }
     });
 }
+
+let displayAvatar = document.getElementById("displayAvatar")
+
+function showImg() {
+    let file = document.getElementById("editAvatar").files;
+    displayAvatar.src = URL.createObjectURL(file[0])
+}

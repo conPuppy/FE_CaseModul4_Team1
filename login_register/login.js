@@ -1,3 +1,5 @@
+
+
 function login() {
     let account = {
         "userName": $("#username").val(),
@@ -16,18 +18,24 @@ function login() {
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data));
             alert("thành công")
-            location.href="../index.html";
+            if (data.role.name === "ROLE_USER") {
+                location.href="../index.html";
+            } else {
+                location.href= "../Admin/Admin.html"
+            }
+
         },
         error: function (err) {
             console.log(err)
+            alert("sai thong tin")
         }
     })
 }
 
-function register() {
-
+function logout() {
+    localStorage.clear();
+    location.reload();
 }
-
 
 function demo() {
     alert("alo?")

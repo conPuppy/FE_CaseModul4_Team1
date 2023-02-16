@@ -37,7 +37,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../crudAccount/crudAccount.js"></script>
+
 
 </head>
 <body class="goto-here">
@@ -179,7 +179,7 @@
 </div>
 <!--Modal: Login with Avatar Form-->
 
-<!--Modal: Login with Avatar Form-->
+<!--Modal: Edit with Avatar Form-->
 <div class="modal fade" id="modalEditAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true" >
     <div class="modal-dialog cascading-modal modal-avatar modal-xl" role="document">
@@ -193,8 +193,8 @@
             <!--            <span class="close">&times;</span>-->
             <div style="text-align: center">
                 <br>
-                <input type="file" id="editAvatar"><br>
-                <img width="150" id="displayAvatar" class="rounded-circle img-responsive">
+                <input type="file" id="editAvatar" onchange="showImg()" ><br>
+                <img width="100" height="100" id="displayAvatar" class="rounded-circle img-responsive">
             </div>
             <!--Body-->
             <div class="modal-body text-center mb-1">
@@ -239,7 +239,8 @@
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
+<script src="../crudAccount/crudAccount.js"></script>
+<script src="../login_register/register.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery-migrate-3.0.1.min.js"></script>
 <script src="../js/popper.min.js"></script>
