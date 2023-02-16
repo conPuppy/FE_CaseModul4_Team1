@@ -37,6 +37,11 @@ function logout() {
     location.reload();
 }
 
+function logoutAdmin() {
+    localStorage.clear();
+    location.href="../index.html";
+}
+
 function demo() {
     alert("alo?")
 }

@@ -10,7 +10,7 @@ function showAccount() {
             console.log(accounts)
             let str = '<div >\n' +
                 '    <div class="container mt-3" >\n' +
-                '        <table class="table" >\n' +
+                '        <table style="background-color: #78d5ef" class="table" >\n' +
                 '            <thead>\n' +
                 '            <tr>\n' +
                 '                <th>Avatar</th>\n' +
@@ -55,7 +55,7 @@ function showEditAccount(id) {
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem("token")
         },
-        url: "http://localhost:8080/accounts/" + id,
+        url: "http://localhost:8080/accounts/edit/" + id,
         success: function (account) {
             console.log(account)
             $("#editId").val(account.id);
